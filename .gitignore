@@ -1,0 +1,17 @@
+# 密钥：绝对不能提交
+config.py
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 运行产物
+_auto/
+output/
+
+# 编辑器
+.vscode/
+.idea/
