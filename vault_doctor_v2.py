@@ -70,7 +70,6 @@ def read_text(path):
     except Exception:
         return ""
 
-
 def extract_deps(text):
     """从一篇笔记里抽出「某篇笔记 的前置」。没有这种表格行就返回空字典。
 
@@ -315,8 +314,9 @@ def run_agent(question, max_rounds=12):
             print(f"  → 调用 {name}  参数={list(args.keys()) or '无'}")
 
             result = execute_tool(name, args)
-            preview = result[:80].replace("\n", " ")
-            print(f"  → 返回：{preview}……")
+            print("  → 返回：")
+            for _ln in result.splitlines():
+                print(("      " + _ln) if _ln.strip() else "")
 
             messages.append(
                 {"role": "tool", "tool_call_id": call.id, "content": result}
