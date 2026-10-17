@@ -74,7 +74,7 @@ def scan_vault():
     notes = iter_notes()
     names = {p.stem for p in notes}
 
-    lines = [f"笔记总数：{len(notes)}", "", "【全部笔记】标题 | 字数"]
+    lines = [f"笔记总数：{len(notes)}", "", "【全部笔记】标题 | 字数\n"]
     links = {}
     empties = []
     for p in notes:
@@ -280,8 +280,9 @@ def run_agent(question, max_rounds=12):
             print(f"  → 调用 {name}  参数={list(args.keys()) or '无'}")
 
             result = execute_tool(name, args)
-            preview = result[:80].replace("\n", " ")
-            print(f"  → 返回：{preview}……")
+            print("  → 返回：")
+            for _ln in result.splitlines():
+                print(("      " + _ln) if _ln.strip() else "")
 
             messages.append(
                 {"role": "tool", "tool_call_id": call.id, "content": result}
